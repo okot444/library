@@ -1,0 +1,19 @@
+define(function() {
+	'use strict';
+
+	/* конвертирование в  "URI1\nURI2\nURI3..." */
+	return {
+		read: function(str /*, opts */) {
+			return str.split('\n');
+		},
+		write: function(obj /*, opts */) {
+			// если массив
+			if (obj instanceof Array) {
+				return obj.map(resource => resource._links.self.href).join('\n');
+			} else { // возвращение URI
+				return obj._links.self.href;
+			}
+		}
+	};
+
+});
